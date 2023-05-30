@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { AddInfo, ButtonBack, InfoMovie, Poster } from './MovieDetails.styled';
 
@@ -7,6 +7,7 @@ export default function MovieDetails() {
   console.log(movieid);
   const [movieDetail, setMovieDetail] = useState();
   const location = useLocation();
+  const linkLocationRef = useRef(location.state?.from ?? '/movies')
   //   const placeholder = 'https://www.themoviedb.org/assets/2/apple-touch-icon-cfba7699efe7a742de25c28e08c38525f19381d31087c69e89d6bcb8e3c0ddfa.png'
 
   useEffect(() => {
@@ -40,7 +41,7 @@ export default function MovieDetails() {
       {movieDetail && (
         <InfoMovie>
           <div>
-            <ButtonBack to={location.state?.from ?? '/movies'}>
+            <ButtonBack to={linkLocationRef.current}>
               Go back
             </ButtonBack>
             <Poster
