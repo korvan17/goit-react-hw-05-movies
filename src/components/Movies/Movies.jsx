@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import { Form } from './Movie.styled';
+import { ListOfMovies } from 'components/Home/Home.styled';
 
 export default function Movies() {
   const [inputValue, setInputValue] = useState('');
@@ -46,7 +48,7 @@ export default function Movies() {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         <input
           id="searchInput"
           className="searchForm-input"
@@ -58,8 +60,8 @@ export default function Movies() {
           placeholder="Search movies"
         />
         <button type="submit">Search</button>
-      </form>
-      <ul>
+      </Form>
+      <ListOfMovies>
         {resultOfSearch &&
           resultOfSearch.map(movie => {
             const {id, title, name } = movie
@@ -71,7 +73,7 @@ export default function Movies() {
               </li>
             )
           })}
-      </ul>
+      </ListOfMovies>
     </div>
   );
 }

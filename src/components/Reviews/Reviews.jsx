@@ -17,13 +17,23 @@ export default function Reviews() {
           fetch(`https://api.themoviedb.org/3/movie/${movieid}/reviews?language=en-US&page=1`, options)
             .then(response => response.json())
             .then(response => {console.log(response)
-                setReview(response)
+                setReview(response.results)
             })
             .catch(err => console.error(err));
 
     }, [movieid])
 
-    console.log(review)
+    // console.log(review)
 
-    return <div>Reviews</div>
+    return <ul>
+        {review && review.map(val => {
+            const {id, author, content} = val
+            return (
+                <li key={id}>
+                    <h4>Author: {author}</h4>
+                    <p>{content}</p>
+                </li>
+            )
+        })} ?? <p>We don't have any reviews for this movie</p>
+    </ul>
 }

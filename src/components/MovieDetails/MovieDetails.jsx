@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
+import { AddInfo, ButtonBack, InfoMovie, Poster } from './MovieDetails.styled';
 
 export default function MovieDetails() {
   const { movieid } = useParams();
   console.log(movieid);
   const [movieDetail, setMovieDetail] = useState();
   const location = useLocation();
-//   const placeholder = 'https://www.themoviedb.org/assets/2/apple-touch-icon-cfba7699efe7a742de25c28e08c38525f19381d31087c69e89d6bcb8e3c0ddfa.png'
+  //   const placeholder = 'https://www.themoviedb.org/assets/2/apple-touch-icon-cfba7699efe7a742de25c28e08c38525f19381d31087c69e89d6bcb8e3c0ddfa.png'
 
   useEffect(() => {
     const options = {
@@ -32,33 +33,44 @@ export default function MovieDetails() {
     } catch (error) {
       console.log(error);
     }
-    
   }, [movieid]);
 
   return (
     <div>
       {movieDetail && (
-        <article>
-        <Link to={location.state?.from ?? '/movies'}>Go back</Link>
-          <img src={`https://image.tmdb.org/t/p/w300/${movieDetail.poster_path}`} alt='posterOfMovie'/>
-          <h2>{movieDetail.title}</h2>
-          <p>User Score: {movieDetail.vote_average * 10}% </p>
-          <h3>Overview</h3>
-          <p>{movieDetail.overview}</p>
-          <h4>Geners</h4>
-          <p> {movieDetail.genres.map(gener => gener.name + ' ')}</p>
-        </article>
+        <InfoMovie>
+          <div>
+            <ButtonBack to={location.state?.from ?? '/movies'}>
+              Go back
+            </ButtonBack>
+            <Poster
+              src={`https://image.tmdb.org/t/p/w300/${movieDetail.poster_path}`}
+              alt="posterOfMovie"
+            />
+          </div>
+          <div>
+            <h2>{movieDetail.title}</h2>
+            <p>User Score: {Math.round(movieDetail.vote_average * 10)}% </p>
+            <h3>Overview</h3>
+            <p>{movieDetail.overview}</p>
+            <h4>Geners</h4>
+            <p> {movieDetail.genres.map(gener => gener.name + ' ')}</p>
+          </div>
+        </InfoMovie>
       )}
+      <AddInfo>
+        <p>Additional information</p>
+        <ul>
+          <li>
+            <Link to="cast">Cast</Link>
+          </li>
+          <li>
+            <Link to="reviews">Reviews</Link>
+          </li>
+        </ul>
+      </AddInfo>
 
-      <ul>
-        <li>
-          <Link to="cast">Cast</Link>
-        </li>
-        <li>
-          <Link to="reviews">Reviews</Link>
-        </li>
-      </ul>
-      <Outlet/>
+      <Outlet />
     </div>
   );
 }

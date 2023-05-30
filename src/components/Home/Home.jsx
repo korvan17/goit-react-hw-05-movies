@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { ListOfMovies } from './Home.styled';
 
 export default function Home() {
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -29,8 +30,7 @@ export default function Home() {
   }, [setTrendingMovies]);
 
   return (
-    <div>
-      <ul>
+      <ListOfMovies>
         {trendingMovies &&
           trendingMovies.map(movie => {
             return (
@@ -41,8 +41,7 @@ export default function Home() {
               </li>
             );
           })}
-      </ul>
-    </div>
+      </ListOfMovies>
   );
 }
 
