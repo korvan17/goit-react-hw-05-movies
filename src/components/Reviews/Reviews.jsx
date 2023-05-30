@@ -25,15 +25,21 @@ export default function Reviews() {
 
     // console.log(review)
 
-    return <ul>
-        {review && review.map(val => {
-            const {id, author, content} = val
-            return (
+    return (
+        <ul>
+          {review && review.length > 0 ? (
+            review.map((val) => {
+              const { id, author, content } = val;
+              return (
                 <li key={id}>
-                    <h4>Author: {author}</h4>
-                    <p>{content}</p>
+                  <h4>Author: {author}</h4>
+                  <p>{content}</p>
                 </li>
-            )
-        })} ?? <p>We don't have any reviews for this movie</p>
-    </ul>
+              );
+            })
+          ) : (
+            <p>We don't have any reviews for this movie</p>
+          )}
+        </ul>
+      );
 }

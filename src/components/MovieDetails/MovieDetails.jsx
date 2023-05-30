@@ -46,6 +46,7 @@ export default function MovieDetails() {
             <Poster
               src={`https://image.tmdb.org/t/p/w300/${movieDetail.poster_path}`}
               alt="posterOfMovie"
+              width='300'
             />
           </div>
           <div>
