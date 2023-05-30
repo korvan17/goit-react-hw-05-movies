@@ -21,7 +21,7 @@ export default function Cast() {
                 console.log(response.cast)
                 setCastOfMovie(response.cast)})
             .catch(err => console.error(err));
-    }, [])
+    }, [movieid])
 
     return <ul>
         

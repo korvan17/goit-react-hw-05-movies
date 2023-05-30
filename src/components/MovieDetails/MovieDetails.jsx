@@ -6,7 +6,7 @@ export default function MovieDetails() {
   console.log(movieid);
   const [movieDetail, setMovieDetail] = useState();
   const location = useLocation();
-  const placeholder = 'https://www.themoviedb.org/assets/2/apple-touch-icon-cfba7699efe7a742de25c28e08c38525f19381d31087c69e89d6bcb8e3c0ddfa.png'
+//   const placeholder = 'https://www.themoviedb.org/assets/2/apple-touch-icon-cfba7699efe7a742de25c28e08c38525f19381d31087c69e89d6bcb8e3c0ddfa.png'
 
   useEffect(() => {
     const options = {
@@ -33,14 +33,14 @@ export default function MovieDetails() {
       console.log(error);
     }
     
-  }, []);
+  }, [movieid]);
 
   return (
     <div>
       {movieDetail && (
         <article>
         <Link to={location.state?.from ?? '/movies'}>Go back</Link>
-          <img src={`https://image.tmdb.org/t/p/w300/${movieDetail.poster_path}`}></img>
+          <img src={`https://image.tmdb.org/t/p/w300/${movieDetail.poster_path}`} alt='posterOfMovie'/>
           <h2>{movieDetail.title}</h2>
           <p>User Score: {movieDetail.vote_average * 10}% </p>
           <h3>Overview</h3>

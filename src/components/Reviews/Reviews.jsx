@@ -21,7 +21,9 @@ export default function Reviews() {
             })
             .catch(err => console.error(err));
 
-    }, [])
+    }, [movieid])
+
+    console.log(review)
 
     return <div>Reviews</div>
 }
